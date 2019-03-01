@@ -30,6 +30,7 @@ class SmurfForm extends Component {
         this.props.updateSmurfList(newSmurf);
       })
       .catch(err => {
+        console.log(err);
         alert(err.response.data.Error)
         debugger;
       })
@@ -43,24 +44,33 @@ class SmurfForm extends Component {
     return (
       <div className="SmurfForm">
         <form onSubmit={this.addSmurf}>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="name"
             value={this.state.name}
             name="name"
-          />
+            className="form-control"
+            />
+        </div>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="age"
             value={this.state.age}
             name="age"
-          />
+            className="form-control"
+            />
+        </div>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="height"
             value={this.state.height}
             name="height"
-          />
+            className="form-control"
+            />
+        </div>
           <button type="submit">Add to the village</button>
         </form>
       </div>
