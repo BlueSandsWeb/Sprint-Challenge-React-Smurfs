@@ -71,7 +71,7 @@ class SmurfForm extends Component {
             className="form-control"
             />
         </div>
-          <button type="submit">Add to the village</button>
+          <button type="submit" className="btn btn-success">Add to the village</button>
         </form>
       </div>
     );
