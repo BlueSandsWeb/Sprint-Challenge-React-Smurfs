@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -12,13 +14,26 @@ class SmurfForm extends Component {
 
   addSmurf = event => {
     event.preventDefault();
-    // add code to create the smurf using the api
-
-    this.setState({
-      name: '',
-      age: '',
-      height: ''
-    });
+    const newSmurf = {
+      name: this.state.name,
+      age: this.state.age,
+      height: this.state.height,
+    }
+    axios
+      .post("http://localhost:3333/smurfs", newSmurf)
+      .then(res => {
+        this.setState({ 
+          name: '',
+          age: '',
+          height: '',
+        })
+        this.props.updateSmurfList(newSmurf);
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err.response.data.Error)
+        debugger;
+      })
   }
 
   handleInputChange = e => {
@@ -29,25 +44,34 @@ class SmurfForm extends Component {
     return (
       <div className="SmurfForm">
         <form onSubmit={this.addSmurf}>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="name"
             value={this.state.name}
             name="name"
-          />
+            className="form-control"
+            />
+        </div>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="age"
             value={this.state.age}
             name="age"
-          />
+            className="form-control"
+            />
+        </div>
+        <div className="form-group">
           <input
             onChange={this.handleInputChange}
             placeholder="height"
             value={this.state.height}
             name="height"
-          />
-          <button type="submit">Add to the village</button>
+            className="form-control"
+            />
+        </div>
+          <button type="submit" className="btn btn-success">Add to the village</button>
         </form>
       </div>
     );

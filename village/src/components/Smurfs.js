@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
 
 import Smurf from './Smurf';
 
@@ -6,7 +7,6 @@ class Smurfs extends Component {
   render() {
     return (
       <div className="Smurfs">
-        <h1>Smurf Village</h1>
         <ul>
           {this.props.smurfs.map(smurf => {
             return (
@@ -15,7 +15,7 @@ class Smurfs extends Component {
                 id={smurf.id}
                 age={smurf.age}
                 height={smurf.height}
-                key={smurf.id}
+                key={uuidv4()}
               />
             );
           })}
